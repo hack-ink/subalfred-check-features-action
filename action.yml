@@ -1,0 +1,30 @@
+name: "Subalfred check features action"
+description: "Use `subalfred check features` to check your runtime code."
+branding:
+  color: "gray-dark"
+  icon: "check-circle"
+inputs:
+  path:
+    description: "The path to the target that you want to check."
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Install Rust nightly toolchain
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: nightly
+        default: true
+    - name: Install Subalfred
+      run: |
+        curl -L https://github.com/hack-ink/subalfred/releases/latest/download/subalfred-x86_64-unknown-linux-gnu.zst | zstd -o subalfred -d
+        chmod u+x subalfred
+        sudo mv subalfred /usr/bin/subalfred-check-features-action
+      shell: bash
+    - name: Fetch latest code
+      uses: actions/checkout@v3
+    - name: Check
+      run: |
+        unset RUSTC_WRAPPER
+        subalfred-check-features-action check features ${{ inputs.path }}
+      shell: bash
