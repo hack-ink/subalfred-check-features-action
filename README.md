@@ -8,7 +8,9 @@
 </div>
 
 ### Usage
-**Take [Polkadot code/repository](https://github.com/paritytech/polkadot) as an example.**
+> **Take [Polkadot code/repository](https://github.com/paritytech/polkadot) as an example.**
+
+**Check single runtime.**
 ```yml
 name: Checks
 on:
@@ -24,7 +26,32 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check
-        uses: actions/subalfred-check-features-action@v0.1.0
+        uses: actions/subalfred-check-features-action@v0.1.5
         with:
           path: runtime/polkadot
+```
+
+**Check multiple runtimes at once.**
+```yml
+name: Checks
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  features-checks:
+    name: Task check features
+    if: github.event_name == 'push' || !github.event.pull_request.draft
+    strategy:
+      matrix:
+        runtime: [runtime/polkadot, runtime/kusama, runtime/rococo]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check ${{ matrix.runtime }}
+        uses: hack-ink/subalfred-check-features-action@v0.1.5
+        with:
+          path: ${{ matrix.runtime }}
 ```
