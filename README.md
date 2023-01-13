@@ -44,7 +44,6 @@ on:
 jobs:
   features-checks:
     name: Task check features
-    if: github.event_name == 'push' || !github.event.pull_request.draft
     strategy:
       matrix:
         runtime: [runtime/polkadot, runtime/kusama, runtime/rococo]
