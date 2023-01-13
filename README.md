@@ -7,6 +7,16 @@
 
 </div>
 
+### Introduction
+**This will check if your runtime features are enabled correctly.**
+
+**Including:**
+- **runtime-benchmarks**
+- **std**
+- **try-runtime**
+
+**Take a look at the real example [here](https://github.com/hack-ink/subalfred-github-action-examples/pull/2).**
+
 ### Usage
 > **Take [Polkadot code/repository](https://github.com/paritytech/polkadot) as an example.**
 
