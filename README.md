@@ -7,6 +7,9 @@
 
 </div>
 
+### DEPRECATED
+**Please move to the new repository at https://github.com/hack-ink/cargo-featalign.**
+
 ### Introduction
 **This will check if your runtime features are enabled correctly.**
 
